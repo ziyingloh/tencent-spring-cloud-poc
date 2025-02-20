@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.tencent.tsf</groupId>
         <artifactId>tsf-demo</artifactId>
-        <version>1.29.4-Finchley-RELEASE</version>
+        <version>1.29.20-Finchley-RELEASE</version>
     </parent>
 
     <artifactId>mongodb-demo</artifactId>
@@ -29,5 +29,21 @@
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>tree</goal> <!-- Specifies the goal to execute -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>
