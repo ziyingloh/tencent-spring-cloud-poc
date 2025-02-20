@@ -1,0 +1,34 @@
+services:
+  consul:
+    image: hashicorp/consul:latest
+    ports:
+      - "8500:8500"
+
+  provider:
+    image: provider-app
+    ports:
+      - "18081:18081"
+    depends_on:
+      - consul
+    environment:
+#      - SPRING_CLOUD_CONSUL_HOST=consul
+      - TSF_CONSUL_IP=consul
+      - TSF_CONSUL_PORT=8500
+      - TSF_APPLICATION_ID=a
+      - TSF_GROUP_ID=b
+      - TSF.SWAGGER.ENABLED=false
+
+  consumer:
+    image: consumer-app
+    ports:
+      - "18083:18083"
+    depends_on:
+      - consul
+      - provider
+    environment:
+#      - SPRING_CLOUD_CONSUL_HOST=consul
+      - TSF_CONSUL_IP=consul
+      - TSF_CONSUL_PORT=8500
+      - TSF_APPLICATION_ID=a
+      - TSF_GROUP_ID=b
+      - TSF.SWAGGER.ENABLED=false
